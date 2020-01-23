@@ -1,0 +1,151 @@
+<div class="heading">List out cities based on country</div>
+<br>
+<label>Country</label>
+<div>
+    <select (change)="getCityByCountry($event.target.value)">
+        <option>Select Country</option>
+        <option *ngFor="let country of countryList" [value]="country.code">{{country.name}}</option>
+    </select>
+	<!--<select placeholder="Phantasyland" (change)="changeCountry($event.target.value)">
+        <option *ngFor ="let count of countryList">{{count.name}} </option>
+    </select>-->
+</div>
+
+
+<label>City</label>
+<div>
+    <!--<select>
+        <option>Select City</option>
+    </select>-->
+	<select placeholder="Anycity">
+        <option>Select City</option>
+        <option *ngFor ="let city of cities">{{city.name}} </option>
+  </select>
+</div>
+<br>
+<div class="heading">Add to do list and delete individual (or) delete selected items</div>
+<br>
+
+
+<div class="todos">
+
+      <div>
+      <form (submit)="addTodo($event)">
+      <input [(ngModel)]="newTodo" (keyup.enter)="newTodo=''" class="textfield" name="newTodo">
+        <button  type="submit" [disabled]="newTodo===''">Add Todo</button>
+      </form>
+      </div>
+
+      <div [hidden]="newTodo">
+        Type in a new todo...
+      </div>
+
+      <div [hidden]="!newTodo">
+        <!-- Another two-way binding example -->
+        Typing: {{ newTodo }}
+      </div>
+
+      <ul>
+      <li *ngFor="let todo of todos; let i=index">
+        <input type="checkbox" class="checkbox" [(ngModel)]="todo.completed" />
+      <span [ngClass]="{'checked': todo.completed}">{{ todo.newTodo }}</span>
+      <span (click)="deleteTodo(i)" class="delete-icon">[X]</span>
+        </li>
+        </ul>
+
+      <div class="mtop20">
+      <button (click)="deleteSelectedTodos()">Delete Selected</button>
+      </div>
+
+  </div>
+<br>
+  <div class="heading">Phone Book App</div>
+<br>
+
+<div>
+  Name: <input type="text" [(ngModel)]="phone_name">
+  Phone Number: <input type="text" [(ngModel)]="phone_number">
+  <input type="button" value="Add" (click)=addphoneBook();>
+ </div>
+
+
+  <ul>
+      <li *ngFor="let phone of phoneList; let i=index">
+      <span>{{ phone.phone_name }} - {{ phone.phone_number }}</span>
+      
+        </li>
+        </ul>
+       
+
+        <br>
+        <div class="heading">Angular textarea characters left</div>
+
+        <!--<textarea id="incidentDescription" formControlName="incidentDescription" #incidentDescription></textarea>
+<small class="form-text text-muted"><code>{{incidentDescription.value.length}}</code> of <code>{{maxIncidentDescriptionLength}}</code> characters</small>-->
+
+<textarea class="form-control" id="title" maxlength="10" 
+name="title" [(ngModel)]="titleModel"></textarea> 
+<span style="color:red" *ngIf="titleModel?.length > 10">
+      10 max
+</span>
+
+<br>
+<div class="heading">Show and hide content based on radio button</div>
+
+
+<div>
+  Marital Status: <input type="radio" name="marital" [(ngModel)]="marital" value="married">Married 
+  &nbsp; <input type="radio" name="marital" [(ngModel)]="marital" value="unmarried">Unmarried
+
+</div>
+<!--{{marital}}-->
+
+<div *ngIf="marital === 'unmarried'">
+  Father Name: <input type="text">
+</div>
+<div *ngIf="marital === 'married'">
+  Spouse Name: <input type="text">
+</div>
+
+<br>
+<div class="heading">Quantity value increase and decrease</div>
+
+<span class="font-24" (click)="quantity('plus')">+</span>
+<input type="text" name="qty" [(ngModel)]="qty">
+<span class="font-24" (click)="quantity('minus')">-</span>
+
+<br>
+<div class="heading">Bill amount based on selected items and quantity with price</div>
+
+<table class="table">
+  <thead>
+  <tr>
+    <td>&nbsp;</td>
+    <td>Item Name</td>
+    <td>Qty</td>
+    <td>Per Price</td>
+    <td>Total</td>
+  </tr>
+  </thead>
+
+  <tbody *ngFor ="let item of itemList">
+  <tr>
+    <td><input type="checkbox" (click)="itemPurchase(item,$event);">
+    <td>{{item.name}}</td>
+
+    <td>
+          <select [(ngModel)]="item.selectedQty" (change)="itemPurchase(item,$event);">
+            <option *ngFor="let number of [1,2,3,4,5,6,7,8,9,10]" value="{{number}}">{{number}}</option>
+          </select>  
+    </td>
+
+    <td>{{item.price}}</td>
+    <td>{{item.total}}</td>
+  </tr>
+  </tbody>
+  </table>
+
+  <span class="font-16">Grand Total : {{grandTotal}} </span>
+
+
+

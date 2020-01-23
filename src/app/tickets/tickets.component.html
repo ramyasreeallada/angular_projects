@@ -1,0 +1,50 @@
+
+<div class="row">
+        Task Description: <input type="text" [(ngModel)]="task">
+        <input type="button" value="Add Task" (click)="add_task()">
+</div>
+
+<br>
+
+<div class="row">
+       <span class="work-heading">To Do Tasks List</span>
+</div>
+<br>
+
+<div class="row" *ngFor="let todo of to_do_lst; let i=index">
+
+        <div class="col-md-4">
+                <input type="checkbox" [disabled]="todo.isDisabled" class="checkbox" (click)="work_selected(todo,$event);"/>
+        </div>
+        <div class="col-md-4">{{ todo.task_desc }}</div>
+        <div class="col-md-4">[X]</div>
+        <div class="col-md-4"></div>
+
+</div>
+
+<br>
+
+<div class="row">
+        <div class="col-md-6 work-heading">Pending Tasks List | Work Completion % {{work_completed_per}} <input type="button" (click)="work_done();" value="Done"></div>
+        <div class="col-md-6 work-heading">Completed Tasks List | Work Pending % {{work_pending_per}}</div>
+</div>
+
+<div class="row">
+        <div class="col-md-6">
+        <ul>
+                <li *ngFor="let pending of work_pending_arr; let i=index">
+                <span class="pad-right-10">{{ pending.task_desc }}</span>
+                <span (click)="pending_close(pending,$event)">[X]</span>
+                </li>
+        </ul>
+        </div>
+
+        <div class="col-md-6">
+        <ul>
+                <li *ngFor="let completed of work_completed_arr; let i=index">
+                <span class="pad-right-10">{{ completed.task_desc }}</span>
+                <span (click)="completed_close(completed,$event)">[X]</span>
+                </li>
+        </ul>
+        </div>
+</div>

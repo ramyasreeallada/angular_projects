@@ -1,0 +1,49 @@
+
+<div [ngClass]="{'hide':isLogin === false}">
+<div class="box">
+<h1>Login</h1>
+<p class="{{login_class}}">{{login_msg}}</p>
+<input type="email" name="email" value="" class="email" placeholder="Email" #login_email />
+  
+<input type="password" name="email" value="" class="email" placeholder="Password" #login_pwd/>
+  
+<a [routerLink]="" (click)="login_authentication(login_email.value,login_pwd.value)"><div class="btn">Sign In</div></a>
+
+</div> <!-- End Box -->
+ 
+<p><a (click)="registration()">Register</a> | Forgot your password? <u style="color:#f1c40f;"><a (click)="reset()">Click Here!</a></u></p>
+</div>
+
+
+
+<div [ngClass]="{'hide':isLogin === true}">
+<div class="box">
+<h1>Registration</h1>
+<p class="succ" *ngIf="isRegistrationSucc">You are registered successfully.</p>
+<input type="text" name="fullname" value="" class="email" [(ngModel)]="reg_fullname" placeholder="Full Name" />
+
+<input type="email" name="email" value="" class="email" [(ngModel)]="reg_email" placeholder="Email" />
+  
+<input type="password" name="email" value="" class="email" [(ngModel)]="reg_password" placeholder="Password"/>
+  
+<a [routerLink]="" (click)="submit_register()"><div id="btn2">Sign Up</div></a>
+  
+</div> <!-- End Box -->
+ 
+<p (click)="login()"><u style="color:#f1c40f;">Sign In!</u></p>
+</div>
+
+
+<div [ngClass]="{'hide':isReset === false}">
+<div class="box">
+<h1>Reset Password</h1>
+<p class="{{reset_class}}">{{reset_msg}}</p>
+<input type="email" name="email" value="" class="email" placeholder="Email" #reset_email />
+  
+<input type="password" name="email" value="" class="email" placeholder="Password" #reset_pwd/>
+  
+<a [routerLink]="" (click)="reset_password(reset_email.value,reset_pwd.value)"><div class="btn">Reset</div></a>
+
+</div> <!-- End Box -->
+<p><a (click)="login()">Sign In!</a></p>
+</div>
